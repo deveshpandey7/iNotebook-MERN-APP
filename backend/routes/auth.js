@@ -39,7 +39,7 @@ router.post('/createuser', [
 
         const data = {
             user:{
-                id: User.id
+                id: user.id
             }
         }
         const authtoken = jwt.sign(data, JWT_SECRET);
@@ -83,7 +83,7 @@ router.post('/login', [
 
          const data = {
             user:{
-                id: User.id
+                id: user.id
             }
         }
         const authtoken = jwt.sign(data, JWT_SECRET);
@@ -100,9 +100,8 @@ router.post('/login', [
 // ROUTE 3: Get loggedin User Details using POST "/api/auth/getuser". Login required
 router.post('/getuser', fetchuser, async (req, res) => {
     try {
-         userId = req.user.id;
+        const userId = req.user.id;
         const user = await User.findById(userId).select("-password");
-        console.log(userId);
         return res.status(200).json({ message: 'User data fetched', user });
 
     } catch (error) {
