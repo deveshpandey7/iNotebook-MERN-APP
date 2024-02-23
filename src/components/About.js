@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 
 const About = () => {
@@ -8,9 +8,7 @@ const About = () => {
 
   return (
     <div>
-
       This is about page.
-  
     </div>
   )
 }
