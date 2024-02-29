@@ -40,7 +40,7 @@ router.post('/createuser', [
 
         const data = {
             user:{
-                id: user.id
+                id: newUser.id
             }
         }
         const authtoken = jwt.sign(data, JWT_SECRET);
