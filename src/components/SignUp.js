@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const SignUp = () => {
+const SignUp = (props) => {
     const [ credentials, setCredentials ] = useState({name: "", email: "", password: "", cpassword: ""});
     let navigate = useNavigate();
 
@@ -19,21 +19,26 @@ const SignUp = () => {
     });
     const json = await response.json();
     console.log(json);
-
+    if(json.success){
       // Save the auth-token and redirect
       localStorage.setItem('token', json.authtoken);
       navigate("/");
-    
+      props.showAlert("Account Created Successfully!!", "success")
+    }
+    else{
+      props.showAlert("Invalid Credentials", "danger")
+    }
  }
 
     const onChange = (e) =>{
       setCredentials({...credentials, [e.target.name]: e.target.value })
    }
   return (
-    <div className="container">
+    <div className="container mt-2">
+      <h2 className="my-3">Please Signup to use iNotebook.</h2>
       <form onSubmit={handleSubmit}>
 
-    <div className="mb-3">
+    <div className="my-3">
       <label htmlFor="name" className="form-label">Name</label>
       <input type="text" className="form-control" id="name" name="name" minLength={3} required onChange={onChange} aria-describedby="emailHelp"/>
     </div>
